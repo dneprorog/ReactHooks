@@ -9,13 +9,10 @@ const styles = {
         alignItems: 'center',
         padding: '.5rem 1rem',
         border: '1px solid #ccc',
-        borderRadius: '4px',
-        marginBottom: '.5rem'
-
     },
 
     input: {
-        marginRight: '1rem'
+        marginRight: '1rem',
     }
 };
 

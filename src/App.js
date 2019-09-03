@@ -1,29 +1,19 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import TodoList from './Todo/TodoList';
 import Context from './context';
-import Loader from './Loader';
-import Modal from "./Modal/Modal";
+// import Modal from "./Modal/Modal";
 
 const AddTodo = React.lazy(() => new Promise(resolve => {
-    setTimeout(() => {
-        resolve(import('./Todo/AddTodo'));
-    }, 3000);
+    resolve(import('./Todo/AddTodo'));
 }));
 
 function App() {
   const [todos, setTodos] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
 
-  useEffect(() => {
-      fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
-          .then(response => response.json())
-          .then(todos => {
-              setTimeout(() => {
-                  setTodos(todos);
-                  setLoading(false);
-              }, 2000);
-          })
-  }, []);
+    const [entries, setEntries] = React.useState([]);
+
+    const addEntry = () => setEntries([entries.length, ...entries]);
+    const deleteEntry = entry => setEntries(entries.filter(e => entry !== e));
 
   function toggleTodo(id) {
       setTodos(
@@ -50,18 +40,27 @@ function App() {
       ))
   }
 
+  const title = 'simple todo list';
+
   return (
       <Context.Provider value={{removeTodo}}>
-        <div className="wrapper">
-            <h1>React tutorial</h1>
-            <Modal />
+          <h1>{title.toUpperCase()}</h1>
 
-            <React.Suspense fallback={<p>loading...</p>}>
-                <AddTodo onCreate={addTodo} />
-            </React.Suspense>
-            {loading && <Loader />}
-            {todos.length ? ( <TodoList todos={todos} onToggle={toggleTodo} /> ): ( loading ? null : <p>No todos!</p> )}
-        </div>
+          {entries.map(entry => (
+              <div>
+                  <div className="wrapper">
+                      {/*<Modal />*/}
+                      <React.Suspense fallback={<p>loading...</p>}>
+                          <div className='wrapper-form'>
+                              <AddTodo onCreate={addTodo} />
+                              <button onClick={() => deleteEntry(entry)}>delete</button>
+                          </div>
+                          <TodoList todos={todos} onToggle={toggleTodo} />
+                      </React.Suspense>
+                  </div>
+              </div>
+          ))}
+          <button className='btn-add' onClick={addEntry}>add TODO list</button>
       </Context.Provider>
   );
 }

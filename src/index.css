@@ -1,3 +1,13 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -5,6 +15,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 100%;
 }
 
 code {
@@ -13,45 +25,53 @@ code {
 }
 
 .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   padding-top: 5rem;
   margin: 0 auto;
   width: 600px;
 }
 
+.wrapper-form {
+  display: flex;
+  width: 100%;
+}
+
 .rm {
   background: red;
-  border-radius: 50%;
   color: #fff;
   border: none;
+  cursor: pointer;
 }
 
 .done {
    text-decoration: line-through;
 }
 
-.lds-dual-ring {
-  display: inline-block;
-  width: 64px;
-  height: 64px;
+h1 {
+  text-align: center;
 }
 
-.lds-dual-ring:after {
-  content: " ";
+form {
+  display: flex;
+  width: 100%;
+}
+
+form > input {
+  width: 90%;
+  padding: .5rem 1rem;
+  border: 1px solid #ccc;
+}
+
+.btn-add {
   display: block;
-  width: 46px;
-  height: 46px;
-  margin: 1px;
-  border-radius: 50%;
-  border: 5px solid blue;
-  border-color: blue transparent blue transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
+  margin: 10rem auto;
+  width: 10rem;
+  height: 2rem;
+  background: blue;
+  color: #ffffff;
+  cursor: pointer;
 }
 
-@keyframes lds-dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
